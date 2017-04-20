@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace UtauLib
 {
     public class UtauNote
     {
         // Regexes for parsing
-        private static readonly Regex Number_RE = new Regex(@"\[#(NEXT|PREV|\d+)\]");
+        private static readonly Regex Number_RE = new Regex(@"^\[#(NEXT|PREV|\d+)\]$");
+        //all property names are purely alphabetic (I think) but the values can be anything (I hope C# handles Unicode correctly)
+        private static readonly Regex MainValues_RE = new Regex(@"^([a-zA-Z]+)=(.+)$");
+        private static readonly Regex AtValues_RE = new Regex(@"^@([a-zA-Z]+)=(.+)$");
 
         public string Number { get; set; }
         public OrderedDictionary MainValues { get; set; }
         public OrderedDictionary AtValues { get; set; } //values that are preceeded by an @ sign in the UST
-        private string[] alldata;
 
         /// <summary>
         /// Create a note from the raw UST data.
@@ -23,13 +26,69 @@ namespace UtauLib
         /// </summary>
         public UtauNote(string[] rawUst)
         {
-            alldata = rawUst;
-            //rawUst[0];
+            MainValues = new OrderedDictionary();
+            AtValues = new OrderedDictionary();
+
+            // parse the Number
+            var i = 0;
+            var matches = Number_RE.Matches(rawUst[i]);
+            if (matches.Count <= 0)
+            {
+                throw new ArgumentException("First line of rawUst must be a number line");
+            }
+            Number = matches[0].Groups[1].Value;
+
+            // parse the Main Values
+            i = 1;
+            if (i < rawUst.Length)
+                matches = MainValues_RE.Matches(rawUst[i]);
+            while (i < rawUst.Length && matches.Count > 0)
+            {
+                MainValues.Add(matches[0].Groups[1].Value, matches[0].Groups[2].Value);
+
+                i++;
+                if (i < rawUst.Length)
+                    matches = MainValues_RE.Matches(rawUst[i]);
+            }
+
+            // parse the At Values - I assume the At values all come after the Main values
+            if (i < rawUst.Length)
+                matches = AtValues_RE.Matches(rawUst[i]);
+            while (i < rawUst.Length && matches.Count > 0)
+            {
+                AtValues.Add(matches[0].Groups[1].Value, matches[0].Groups[2].Value);
+
+                i++;
+                if (i < rawUst.Length)
+                    matches = AtValues_RE.Matches(rawUst[i]);
+            }
+
+            if (i < rawUst.Length)
+            {
+                throw new ArgumentException("Not everything has been parsed!");
+            }
         }
 
+        /// <summary>
+        /// Returns the note as a string formatted as the UST would want it
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return String.Join("\n", alldata);
+            List<string> toReturn = new List<string>();
+            toReturn.Add("[#" + Number + "]");
+
+            foreach (System.Collections.DictionaryEntry item in MainValues)
+            {
+                toReturn.Add(item.Key + "=" + item.Value);
+            }
+
+            foreach (System.Collections.DictionaryEntry item in AtValues)
+            {
+                toReturn.Add("@" + item.Key + "=" + item.Value);
+            }
+            
+            return String.Join("\n", toReturn);
         }
 
         /// <summary>
@@ -48,7 +107,7 @@ namespace UtauLib
             }
             string[] preamble = new ArraySegment<string>(rawUst, 0, i).Array;
 
-
+            
             //handle the other notes
             int lasti = i;
             i++;
@@ -57,17 +116,20 @@ namespace UtauLib
             {
                 while (i < rawUst.Length && !Number_RE.IsMatch(rawUst[i]))
                 {
+                    // skip past parts that aren't note delimiters
                     i++;
                 }
-                allnotes.Add(new UtauNote(new ArraySegment<string>(rawUst, lasti, i-lasti).Array));
+
+                //copy the relevant data into a new array
+                string[] noteArg = new string[i - lasti];
+                Array.Copy(rawUst, lasti, noteArg, 0, i - lasti);
                 
+                allnotes.Add(new UtauNote(noteArg));
                 lasti = i;
                 i++;
-                Console.WriteLine(i);
             }
 
-            Console.WriteLine("Done!");
-            return new Tuple<string[], List<UtauNote>>(preamble, allnotes); // TODO
+            return new Tuple<string[], List<UtauNote>>(preamble, allnotes);
         }
     }
 }

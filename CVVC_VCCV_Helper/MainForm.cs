@@ -30,15 +30,13 @@ namespace CVVC_VCCV_Helper
         {
             Console.WriteLine(Directory.GetCurrentDirectory());
             var lines = File.ReadAllLines(USTFile, Helpers.Shift_JIS);
-            /*Console.WriteLine("HEY!" + USTFile);
-            
-            foreach (var line in lines)
-            {
-                Console.WriteLine(line);
-            }*/
 
             Console.WriteLine("\n\n STARTING PARSE \n\n");
-            UtauLib.UtauNote.parseUSTFile(lines).Item2.ForEach(Console.WriteLine);
+            var parsed = UtauLib.UtauNote.parseUSTFile(lines);
+            Console.WriteLine("Done!");
+            parsed.Item2.ForEach(
+                (k) => Console.WriteLine(k + "\n")
+            );
 
 
             //File.WriteAllLines(USTFile, lines, Encoding.GetEncoding("shift_jis"));
