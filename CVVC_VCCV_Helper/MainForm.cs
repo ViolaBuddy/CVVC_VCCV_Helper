@@ -29,17 +29,19 @@ namespace CVVC_VCCV_Helper
         private void go_btn_Click(object sender, EventArgs e)
         {
             Console.WriteLine(Directory.GetCurrentDirectory());
-            Console.WriteLine("HELLO! I AM DEBUG!");
             var lines = File.ReadAllLines(USTFile, Helpers.Shift_JIS);
-            Console.WriteLine("HEY!" + USTFile);
+            /*Console.WriteLine("HEY!" + USTFile);
             
             foreach (var line in lines)
             {
                 Console.WriteLine(line);
-            }
+            }*/
+
+            Console.WriteLine("\n\n STARTING PARSE \n\n");
+            UtauLib.UtauNote.parseUSTFile(lines).Item2.ForEach(Console.WriteLine);
 
 
-            File.WriteAllLines(USTFile, lines, Encoding.GetEncoding("shift_jis"));
+            //File.WriteAllLines(USTFile, lines, Encoding.GetEncoding("shift_jis"));
             Close();
         }
     }

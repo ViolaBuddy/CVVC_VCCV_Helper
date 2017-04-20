@@ -20,10 +20,9 @@ namespace CVVC_VCCV_Helper
             form.USTFile = args.FirstOrDefault();
             if (form.USTFile == null)
             {
-                form.USTFile = @"../../../Test_tempfile.ust";
+                form.USTFile = @"../../../test_temp.ust";
             }
             Application.Run(form);
-            Application.Run(new MainForm());
         }
     }
 }
