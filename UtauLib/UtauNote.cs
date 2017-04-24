@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
@@ -17,6 +18,9 @@ namespace UtauLib
         public string Number { get; set; }
         public OrderedDictionary MainValues { get; set; }
         public OrderedDictionary AtValues { get; set; } //values that are preceeded by an @ sign in the UST
+        public bool IsRest { get { return (string) MainValues["Lyric"] == "R" || (string)MainValues["Lyric"] == "r"; } }
+        public string Lyric { get { return (string) MainValues["Lyric"]; } }
+        public int Length { get { return (int) MainValues["Length"]; } }
 
         /// <summary>
         /// Create a note from the raw UST data.
@@ -66,6 +70,27 @@ namespace UtauLib
             if (i < rawUst.Length)
             {
                 throw new ArgumentException("Not everything has been parsed!");
+            }
+        }
+
+        /// <summary>
+        /// Copy constructor: the internal fields are also completely recreated (deep copy)
+        /// </summary>
+        /// <param name="u"></param>
+        public UtauNote(UtauNote u)
+        {
+            Number = u.Number;
+
+            MainValues = new OrderedDictionary();
+            foreach (DictionaryEntry de in u.MainValues)
+            {
+                MainValues.Add(de.Key, de.Value);
+            }
+
+            AtValues = new OrderedDictionary();
+            foreach (DictionaryEntry de in u.AtValues)
+            {
+                AtValues.Add(de.Key, de.Value);
             }
         }
 

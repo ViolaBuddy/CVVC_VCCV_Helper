@@ -22,7 +22,10 @@ namespace CVVC_VCCV_Helper
             {
                 form.USTFile = @"../../../test_temp.ust";
             }
-            Application.Run(form);
+            if (form.Valid)
+            {
+                Application.Run(form);
+            }
         }
     }
 }
