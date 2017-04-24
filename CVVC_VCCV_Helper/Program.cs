@@ -14,17 +14,26 @@ namespace CVVC_VCCV_Helper
         [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            MainForm form = new MainForm();
-            form.USTFile = args.FirstOrDefault();
-            if (form.USTFile == null)
+            try
             {
-                form.USTFile = @"../../../test_temp.ust";
-            }
-            if (form.Valid)
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                MainForm form = new MainForm();
+                form.USTFile = args.FirstOrDefault();
+                if (form.USTFile == null)
+                {
+                    form.USTFile = @"../../../test_temp.ust";
+                    form.Testing = true;
+                }
+                if (form.Valid)
+                {
+                    Application.Run(form);
+                }
+            } 
+            catch (Exception ex)
             {
-                Application.Run(form);
+                MessageBox.Show("An unexpected error occurred:\n\n" + ex.ToString(), "Error!");
+                throw ex;
             }
         }
     }

@@ -7,7 +7,7 @@ CacheDir=
 Mode2=True
 [#0000]
 Length=480
-Lyric=?yi_oH
+Lyric=yi
 NoteNum=62
 Intensity=100
 Modulation=0
@@ -18,7 +18,7 @@ Modulation=0
 @alias=yi_oM
 [#0001]
 Length=480
-Lyric=?shan_oH
+Lyric=shan
 NoteNum=62
 Intensity=100
 Modulation=0
@@ -31,7 +31,7 @@ PBW=80
 @alias=shan_oM
 [#0002]
 Length=480
-Lyric=?yi_oH
+Lyric=yi
 NoteNum=69
 Intensity=100
 Modulation=0
@@ -44,7 +44,7 @@ PBW=119
 @alias=yi_oH
 [#0003]
 Length=480
-Lyric=?shan_oH
+Lyric=shan
 NoteNum=69
 Intensity=100
 Modulation=0
@@ -57,7 +57,7 @@ PBW=80
 @alias=shan_oH
 [#0004]
 Length=480
-Lyric=?liang_oH
+Lyric=liang
 NoteNum=71
 Intensity=100
 Modulation=0
@@ -70,7 +70,7 @@ PBW=89
 @alias=liang_oH
 [#0005]
 Length=480
-Lyric=?jin_oH
+Lyric=jin
 NoteNum=71
 Intensity=100
 Modulation=0
@@ -83,7 +83,7 @@ PBW=80
 @alias=jin_oH
 [#0006]
 Length=720
-Lyric=?jin_oH
+Lyric=jin
 NoteNum=69
 Intensity=100
 Modulation=0
@@ -107,7 +107,7 @@ PBW=80
 @stpoint=0
 [#0008]
 Length=480
-Lyric=?man_oH
+Lyric=man
 NoteNum=67
 Intensity=100
 Modulation=0
@@ -118,7 +118,7 @@ Modulation=0
 @alias=man_oH
 [#0009]
 Length=480
-Lyric=?tian_oH
+Lyric=tian
 NoteNum=67
 Intensity=100
 Modulation=0
@@ -131,7 +131,7 @@ PBW=80
 @alias=tian_oH
 [#0010]
 Length=480
-Lyric=?dou_oH
+Lyric=dou
 NoteNum=66
 Intensity=100
 Modulation=0
@@ -144,7 +144,7 @@ PBW=84
 @alias=dou_oM
 [#0011]
 Length=480
-Lyric=?shi_oH
+Lyric=shi
 NoteNum=66
 Intensity=100
 Modulation=0
@@ -157,7 +157,7 @@ PBW=80
 @alias=shi_oM
 [#0012]
 Length=480
-Lyric=?xiao_oH
+Lyric=xiao
 NoteNum=64
 Intensity=100
 Modulation=0
@@ -170,7 +170,7 @@ PBW=89
 @alias=xiao_oM
 [#0013]
 Length=480
-Lyric=?xing_oH
+Lyric=xing
 NoteNum=64
 Intensity=100
 Modulation=0
@@ -183,7 +183,7 @@ PBW=80
 @alias=xing_oM
 [#0014]
 Length=960
-Lyric=?xing_oH
+Lyric=xing
 NoteNum=62
 Intensity=100
 Modulation=0

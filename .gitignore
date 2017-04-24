@@ -10,17 +10,15 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-# Build results
+# Build results: Full Release is kept public, though
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
 [Xx]64/
 [Xx]86/
 [Bb]uild/
 bld/
-[Bb]in/
 [Oo]bj/
+UtauLib/bin/
 
 # Visual Studio 2015 cache/options directory
 .vs/

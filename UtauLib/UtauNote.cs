@@ -12,15 +12,21 @@ namespace UtauLib
         // Regexes for parsing
         private static readonly Regex Number_RE = new Regex(@"^\[#(NEXT|PREV|\d+)\]$");
         //all property names are purely alphabetic (I think) but the values can be anything (I hope C# handles Unicode correctly)
-        private static readonly Regex MainValues_RE = new Regex(@"^([a-zA-Z]+)=(.+)$");
-        private static readonly Regex AtValues_RE = new Regex(@"^@([a-zA-Z]+)=(.+)$");
+        private static readonly Regex MainValues_RE = new Regex(@"^([a-zA-Z]+)=(.*)$");
+        private static readonly Regex AtValues_RE = new Regex(@"^@([a-zA-Z]+)=(.*)$");
 
         public string Number { get; set; }
         public OrderedDictionary MainValues { get; set; }
         public OrderedDictionary AtValues { get; set; } //values that are preceeded by an @ sign in the UST
         public bool IsRest { get { return (string) MainValues["Lyric"] == "R" || (string)MainValues["Lyric"] == "r"; } }
-        public string Lyric { get { return (string) MainValues["Lyric"]; } }
-        public int Length { get { return (int) MainValues["Length"]; } }
+        public string Lyric {
+            get { return (string)MainValues["Lyric"]; }
+            set { MainValues["Lyric"] = value; }
+        }
+        public int Length {
+            get { return Int32.Parse((string) MainValues["Length"]); }
+            set { MainValues["Length"] = value.ToString(); }
+        }
 
         /// <summary>
         /// Create a note from the raw UST data.
@@ -69,7 +75,13 @@ namespace UtauLib
 
             if (i < rawUst.Length)
             {
-                throw new ArgumentException("Not everything has been parsed!");
+                string output = "Not everything has been parsed!\n";
+                foreach(var item in rawUst)
+                {
+                    output = output + item;
+                }
+
+                throw new ArgumentException(output + "\n\n");
             }
         }
 
@@ -130,9 +142,12 @@ namespace UtauLib
             {
                 i++;
             }
-            string[] preamble = new ArraySegment<string>(rawUst, 0, i).Array;
+            string[] preamble = new string[i];
+            for(var j = 0; j < i; j++)
+            {
+                preamble[j] = rawUst[j];
+            }
 
-            
             //handle the other notes
             int lasti = i;
             i++;
@@ -155,6 +170,22 @@ namespace UtauLib
             }
 
             return new Tuple<string[], List<UtauNote>>(preamble, allnotes);
+        }
+
+        /// <summary>
+        /// Renumbers the given UtauNote List from zero, in place, skipping over PREV and NEXT notes
+        /// </summary>
+        /// <param name="input"></param>
+        public static void Renumber(List<UtauNote> input)
+        {
+            int counter = 0;
+            foreach(var item in input)
+            {
+                if (item.Number == "PREV" || item.Number == "NEXT")
+                    continue;
+                item.Number = String.Format("{0:0000}", item.Number);
+                counter++;
+            }
         }
     }
 }

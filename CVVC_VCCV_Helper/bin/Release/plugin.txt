@@ -1,0 +1,3 @@
+name=CVVC/VCCV Helper
+execute=CVVC_VCCV_Helper.exe
+shell=use

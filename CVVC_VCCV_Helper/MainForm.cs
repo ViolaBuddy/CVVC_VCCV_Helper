@@ -19,7 +19,8 @@ namespace CVVC_VCCV_Helper
         private string _USTFile;
         private string[] _preamble;
         private List<UtauNote> _notesList;
-        public bool Valid = true; //if something goes wrong, don't start the plugin at all
+        public bool Valid = true; // if something goes wrong, don't start the plugin at all
+        public bool Testing = false; // if testing, print out instead of writing back to disk
         public string USTFile {
             get
             {
@@ -63,12 +64,27 @@ namespace CVVC_VCCV_Helper
 
         private void go_btn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(Directory.GetCurrentDirectory());
 
-            addConnectingSounds(_notesList);
+            _notesList = addConnectingSounds(_notesList);
 
-            //File.WriteAllLines(USTFile, lines, Encoding.GetEncoding("shift_jis"));
+            string output =
+                String.Join("\n", _preamble) + "\n" +
+                String.Join("\n", _notesList.Select(i => i.ToString()));
+
+            if (Testing)
+            {
+                Console.WriteLine(output);
+            } else
+            {
+                File.WriteAllText(USTFile, output, Encoding.GetEncoding("shift_jis"));
+            }
+
             Close();
+        }
+
+        private void about_btn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Version 0.1\n\nSee https://github.com/ViolaBuddy/CVVC_VCCV_Helper for more information.");
         }
 
         /// <summary>
@@ -92,10 +108,9 @@ namespace CVVC_VCCV_Helper
                 }
                 
                 List<UtauNote> connectingLyrics = CVVC_Chinese.GetConnectingNotes(
-                    i==0 ? null : input[i-1].Lyric,
-                    input[i].Lyric,
-                    input[i+1].Lyric);
-
+                    i==0 ? null : input[i-1],
+                    input[i],
+                    input[i+1]);
                 output.AddRange(connectingLyrics);
             }
             return output;

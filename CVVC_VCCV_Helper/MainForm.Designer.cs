@@ -32,6 +32,7 @@
             this.go_btn = new System.Windows.Forms.Button();
             this.cancel_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.about_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dictionary_combo
@@ -44,10 +45,10 @@
             // 
             // go_btn
             // 
-            this.go_btn.Location = new System.Drawing.Point(533, 98);
+            this.go_btn.Location = new System.Drawing.Point(544, 98);
             this.go_btn.Name = "go_btn";
             this.go_btn.Size = new System.Drawing.Size(100, 26);
-            this.go_btn.TabIndex = 1;
+            this.go_btn.TabIndex = 2;
             this.go_btn.Text = "Go";
             this.go_btn.UseVisualStyleBackColor = true;
             this.go_btn.Click += new System.EventHandler(this.go_btn_Click);
@@ -57,7 +58,7 @@
             this.cancel_btn.Location = new System.Drawing.Point(650, 98);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(100, 26);
-            this.cancel_btn.TabIndex = 2;
+            this.cancel_btn.TabIndex = 3;
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
             this.cancel_btn.Click += new System.EventHandler(this.cancel_btn_Click);
@@ -68,14 +69,25 @@
             this.label1.Location = new System.Drawing.Point(75, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 17);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 100;
             this.label1.Text = "Choose action:";
+            // 
+            // about_btn
+            // 
+            this.about_btn.Location = new System.Drawing.Point(438, 98);
+            this.about_btn.Name = "about_btn";
+            this.about_btn.Size = new System.Drawing.Size(100, 26);
+            this.about_btn.TabIndex = 1;
+            this.about_btn.Text = "About";
+            this.about_btn.UseVisualStyleBackColor = true;
+            this.about_btn.Click += new System.EventHandler(this.about_btn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 153);
+            this.Controls.Add(this.about_btn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancel_btn);
             this.Controls.Add(this.go_btn);
@@ -93,6 +105,7 @@
         private System.Windows.Forms.Button go_btn;
         private System.Windows.Forms.Button cancel_btn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button about_btn;
     }
 }
 
