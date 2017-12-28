@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CVVC_VCCV_Helper
+namespace MidiRounder
 {
     static class Program
     {
@@ -18,7 +18,7 @@ namespace CVVC_VCCV_Helper
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                MainForm form = new MainForm();
+                Form1 form = new Form1();
                 form.USTFile = args.FirstOrDefault();
                 if (form.USTFile == null)
                 {
@@ -30,12 +30,7 @@ namespace CVVC_VCCV_Helper
                     Application.Run(form);
                 }
             }
-            /*catch (Exception ex)
-            {
-                MessageBox.Show("An unexpected error occurred:\n\n" + ex.ToString(), "Error!");
-                Console.WriteLine(ex.ToString());
-                throw ex;
-            }*/ finally
+            finally
             {
 
             }

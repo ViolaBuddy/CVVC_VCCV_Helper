@@ -50,11 +50,13 @@ namespace CVVC_VCCV_Helper
                 }
             }
         }
-
+        
         // methods
         public MainForm()
         {
             InitializeComponent();
+            List<string> options = new List<string>() { "CVVC Chinese", "CVVC+ French", "VCCV English", "CVVC English" };
+            dictionary_combo.Items.AddRange(options.ToArray());
         }
 
         private void cancel_btn_Click(object sender, EventArgs e)
@@ -64,8 +66,36 @@ namespace CVVC_VCCV_Helper
 
         private void go_btn_Click(object sender, EventArgs e)
         {
+            Func<UtauNote, UtauNote, UtauNote, List<UtauNote>> selected_dictionary;
+            Console.WriteLine(dictionary_combo);
+            Console.WriteLine(dictionary_combo.SelectedItem);
+            Console.WriteLine((string) dictionary_combo.SelectedItem);
+            switch ((string) dictionary_combo.SelectedItem)
+            {
+                case "CVVC+ French":
+                    selected_dictionary = CVVCPlus_French.GetConnectingNotes;
+                    Console.WriteLine("Choosing CVVC+ French");
+                    break;
+                case "VCCV English":
+                    selected_dictionary = VCCV_English.GetConnectingNotes;
+                    Console.WriteLine("Choosing VCCV English");
+                    break;
+                case "CVVC English":
+                    selected_dictionary = CVVC_English.GetConnectingNotes;
+                    Console.WriteLine("Choosing CVVC English");
+                    break;
+                case "CVVC Chinese":
+                    selected_dictionary = CVVC_Chinese.GetConnectingNotes;
+                    Console.WriteLine("Choosing CVVC Chinese");
+                    break;
+                default:
+                    selected_dictionary = CVVC_Chinese.GetConnectingNotes;
+                    Console.WriteLine((string)dictionary_combo.SelectedItem);
+                    Console.WriteLine("No selection detected... Choosing CVVC Chinese");
+                    break;
+            }
 
-            _notesList = addConnectingSounds(_notesList);
+            _notesList = addConnectingSounds(_notesList, selected_dictionary);
 
             string output =
                 String.Join("\n", _preamble) + "\n" +
@@ -84,7 +114,7 @@ namespace CVVC_VCCV_Helper
 
         private void about_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version 0.1\n\nSee https://github.com/ViolaBuddy/CVVC_VCCV_Helper for more information.");
+            MessageBox.Show("Version 0.2\n\nSee https://github.com/ViolaBuddy/CVVC_VCCV_Helper for more information.");
         }
 
         /// <summary>
@@ -94,7 +124,8 @@ namespace CVVC_VCCV_Helper
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private static List<UtauNote> addConnectingSounds(List<UtauNote> input)
+        private static List<UtauNote> addConnectingSounds(List<UtauNote> input,
+            Func<UtauNote, UtauNote, UtauNote, List<UtauNote>> getConnectingotes)
         {
             List<UtauNote> output = new List<UtauNote>();
             for(var i = 0; i < input.Count; i++)
@@ -107,7 +138,7 @@ namespace CVVC_VCCV_Helper
                     continue;
                 }
                 
-                List<UtauNote> connectingLyrics = CVVC_Chinese.GetConnectingNotes(
+                List<UtauNote> connectingLyrics = getConnectingotes(
                     i==0 ? null : input[i-1],
                     input[i],
                     input[i+1]);

@@ -39,10 +39,11 @@ PBW=80
 @overlap=150
 @stpoint=0
 @filename=VC\l_kxl_kxl.wav
+@cache=C:\Users\Derrick\Desktop\Derrick\utauBulkEnvelopeEditor\Test_Englishsource.cache\2_xl_D4_Cj6FUt.wav
 @alias=xl
 [#0003]
 Length=480
-Lyric=twink
+Lyric=twin
 NoteNum=69
 PreUtterance=
 Intensity=100
@@ -65,6 +66,7 @@ PBW=80
 @overlap=150
 @stpoint=0
 @filename=VC\l_kxl_kxl.wav
+@cache=C:\Users\Derrick\Desktop\Derrick\utauBulkEnvelopeEditor\Test_Englishsource.cache\4_xl_A4_IRtHwO.wav
 @alias=xl
 [#0005]
 Length=480
@@ -79,6 +81,7 @@ PBW=89
 @overlap=30
 @stpoint=0
 @filename=CV\-li_li.wav
+@cache=C:\Users\Derrick\Desktop\Derrick\utauBulkEnvelopeEditor\Test_Englishsource.cache\5_li_B4_ehJyaq.wav
 @alias=li
 [#0006]
 Length=480

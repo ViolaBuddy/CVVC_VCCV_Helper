@@ -45,7 +45,7 @@
             // 
             // go_btn
             // 
-            this.go_btn.Location = new System.Drawing.Point(544, 98);
+            this.go_btn.Location = new System.Drawing.Point(544, 151);
             this.go_btn.Name = "go_btn";
             this.go_btn.Size = new System.Drawing.Size(100, 26);
             this.go_btn.TabIndex = 2;
@@ -55,7 +55,7 @@
             // 
             // cancel_btn
             // 
-            this.cancel_btn.Location = new System.Drawing.Point(650, 98);
+            this.cancel_btn.Location = new System.Drawing.Point(650, 151);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(100, 26);
             this.cancel_btn.TabIndex = 3;
@@ -68,13 +68,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(75, 44);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 17);
+            this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 100;
-            this.label1.Text = "Choose action:";
+            this.label1.Text = "Choose reclist:";
             // 
             // about_btn
             // 
-            this.about_btn.Location = new System.Drawing.Point(438, 98);
+            this.about_btn.Location = new System.Drawing.Point(438, 151);
             this.about_btn.Name = "about_btn";
             this.about_btn.Size = new System.Drawing.Size(100, 26);
             this.about_btn.TabIndex = 1;
@@ -86,7 +86,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 153);
+            this.ClientSize = new System.Drawing.Size(796, 237);
             this.Controls.Add(this.about_btn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancel_btn);

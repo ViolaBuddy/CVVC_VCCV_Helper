@@ -19,6 +19,7 @@
 bld/
 [Oo]bj/
 UtauLib/bin/
+MidiRounder/bin
 
 # Visual Studio 2015 cache/options directory
 .vs/
