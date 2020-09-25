@@ -89,7 +89,12 @@ namespace CVVC_VCCV_Helper
             }
 
             //TODO: vowel-vowel sounds like V
-
+            //TODO: double-check what's going on with the UtauNote copy constructor and why the tempo is being copied from the next note or something
+            //for now, hack:
+            toReturn.ForEach(note =>
+            {
+                //note.MainValues.Remove("Tempo"); //remove if exists
+            });
             return toReturn;
         }
 

@@ -106,7 +106,6 @@ namespace CVVC_VCCV_Helper
 
             // figure out the ending
             List<string> ending_split = EndingParser(lyric_split.Coda[0]);
-
             if (ending_split.Count == 0)
             {
                 string newNote = GetConnectingSound(lyric_split.Nucleus[0], lyric_split.Coda[0], nextlyric_split.Onset[0], nextlyric_split.Nucleus[0]);
@@ -135,6 +134,10 @@ namespace CVVC_VCCV_Helper
                     CV.Length = CV.Length - 60; //TODO: something more clever with lengths. For now, 60 is a 32th note
                     VC.Lyric = newNote;
                     VC.Length = 60;
+                    if (Sonorant_Consonant_RE.IsMatch(lyric_split.Coda[0]))
+                    {
+                        VC.Lyric = newNote + "-";
+                    }
                     toReturn.Add(VC);
                 }
 
@@ -151,7 +154,7 @@ namespace CVVC_VCCV_Helper
             {
                 // ending consonant cluster(s) of some sort
                 // TODO: more than one consonant cluster is not yet supported
-                // e.g. b6lbz, which should be [b6][6l-][lb-][bz] is just [b6][6l-][lbz] but lbz is not a single sound
+                // e.g. b6lbz, which should be [b6][6l-][lb-][bz] is currently just [b6][6l-][lbz] but lbz is not a single sound
 
                 string newNote = GetEndingSound(lyric_split.Nucleus[0], ending_split[0]);
                 UtauNote VC = new UtauNote(curr);
@@ -189,11 +192,21 @@ namespace CVVC_VCCV_Helper
             if (prev == null || prev.IsRest)
             {
                 toReturn[0].Lyric = "-" + toReturn[0].Lyric;
+            } else if (lyric_split.Onset[0] == "")
+            {
+                // if it's not following a rest but it starts with a vowel
+                toReturn[0].Lyric = "_" + toReturn[0].Lyric;
             }
             // adjust last sound if following note is a rest
             if (next == null || next.IsRest)
             {
                 toReturn[toReturn.Count-1].Lyric = toReturn[toReturn.Count - 1].Lyric + "-";
+            }
+
+            foreach (UtauNote n in toReturn.Skip(1))
+            {
+                n.MainValues.Remove("Tempo");
+                //Remove tempo marking from any except the first (which is where it was originally)
             }
 
             return toReturn;
@@ -300,12 +313,20 @@ namespace CVVC_VCCV_Helper
         /// <returns></returns>
         private static string GetConnectingSound(string last_V, string last_VC, string next_CV, string next_V)
         {
+            // first, if next_CV is actually a CCV, drop the second C
+            if (next_CV != null && Onset_Clusters_RE.IsMatch(next_CV))
+            {
+                next_CV = next_CV.Substring(0, next_CV.Length - 1);
+            }
+
+
             // if either note is a rest
             if (last_V == null || next_V == null)
             {
                 // R - (anything) as in "R ta" -> [R][-ta]
                 return null;
             }
+
 
             // the normal case (neither is a rest)
             if (next_CV == "")

@@ -22,7 +22,8 @@ namespace MidiRounder
                 form.USTFile = args.FirstOrDefault();
                 if (form.USTFile == null)
                 {
-                    form.USTFile = @"../../../test_temp2.ust";
+                    //form.USTFile = @"../../../test_temp2.ust";
+                    form.USTFile = @"../../../test_broken.ust";
                     form.Testing = true;
                 }
                 if (form.Valid)
