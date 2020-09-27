@@ -15,9 +15,18 @@ Some changes to the final syllables occur (mainly to disambiguate them):
 - zhi/chi/shi/ri -> h-i
 - ong -> yong
 
-# French CVVC
+# French CVVC & VCV
 
-TODO
+French is my native language however please take this with a grain of salt.
+
+- Consonants: b ch d f g h j k l m n p r s sh t v w x y z
+- CCV Consonants: bl br by dr dy fl fr fy gl gr gy hy kl kr kw ky ly my ny pl pr py ry sy tr vr zy
+- Vowels : a A O e E & @ i I o W 3 U u
+- Diphtongs: W 8
+
+Notes:
+- W strings together with a
+- 8 strings together with i
 
 # English VCCV
 

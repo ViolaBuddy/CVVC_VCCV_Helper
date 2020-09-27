@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CVVCEve_French.cs" />
     <Compile Include="CVVCPlus_French.cs" />
     <Compile Include="CVVC_English.cs" />
     <Compile Include="CVVC_Chinese.cs" />
