@@ -19,7 +19,9 @@
 bld/
 [Oo]bj/
 UtauLib/bin/
-MidiRounder/bin
+MidiRounder/bin/
+CVVC_VCCV_Helper/bin/
+VCCV_English_Test/bin/
 
 # Visual Studio 2015 cache/options directory
 .vs/
