@@ -88,7 +88,77 @@ namespace VCCV_English_Test
         public void VCCV_English_test()
         {
             Console.WriteLine("STARTING VCCV ENGLISH GetConnectingNotes TEST");
-            
+
+            // reflection to test private stuff
+            var parent_type = typeof(VCCV_English);
+            var inner_type = parent_type.GetNestedType("VCCV_English_Syllable", BindingFlags.NonPublic);
+            PrivateType inner_type_private = new PrivateType(inner_type);
+
+            //1
+            var input_note = new UtauNote(new string[] {
+                "[#0010]",
+                "Length=229",
+                "Lyric=fIn",
+                "NoteNum=50"
+            });
+            var next_note = new UtauNote(new string[] {
+                "[#0011]",
+                "Length=240",
+                "Lyric=R",
+                "NoteNum=46"
+            });
+            var result = VCCV_English.GetConnectingNotes(null, input_note, next_note);
+            var expected = new List<UtauNote>(new UtauNote[] {
+                new UtauNote(new string[] {
+                    "[#0010]",
+                    "Length=169",
+                    "Lyric=-fI",
+                    "NoteNum=50",
+                }),
+                new UtauNote(new string[] {
+                    "[#0010]",
+                    "Length=60",
+                    "Lyric=In-",
+                    "NoteNum=50",
+                }),
+                });
+            CollectionAssert.AreEqual(expected.ConvertAll<string>(x => x.ToString()), result.ConvertAll<string>(x => x.ToString()));
+
+            //2
+            input_note = new UtauNote(new string[] {
+                "[#0010]",
+                "Length=229",
+                "Lyric=fIn",
+                "NoteNum=50"
+            });
+            next_note = new UtauNote(new string[] {
+                "[#0011]",
+                "Length=240",
+                "Lyric=dhen",
+                "NoteNum=46"
+            });
+            result = VCCV_English.GetConnectingNotes(null, input_note, next_note);
+            expected = new List<UtauNote>(new UtauNote[] {
+                new UtauNote(new string[] {
+                    "[#0010]",
+                    "Length=109",
+                    "Lyric=-fI",
+                    "NoteNum=50",
+                }),
+                new UtauNote(new string[] {
+                    "[#0010]",
+                    "Length=60",
+                    "Lyric=In-",
+                    "NoteNum=50",
+                }),
+                new UtauNote(new string[] {
+                    "[#0010]",
+                    "Length=60",
+                    "Lyric=n dh",
+                    "NoteNum=50",
+                }),
+                });
+            CollectionAssert.AreEqual(expected.ConvertAll<string>(x => x.ToString()), result.ConvertAll<string>(x => x.ToString()));
 
             Console.WriteLine("ENDING VCCV ENGLISH GetConnectingNotes TEST");
         }

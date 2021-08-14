@@ -55,7 +55,7 @@ namespace CVVC_VCCV_Helper
         public MainForm()
         {
             InitializeComponent();
-            List<string> options = new List<string>() { "CVVC Chinese", "CVVC+ French","CVVC Eve French","VCCV English", "CVVC English" };
+            List<string> options = new List<string>() { "CVVC Chinese", "CVVC+ French","CVVC Eve French","VCCV English", "CVVC English", "Arpasing English" };
             dictionary_combo.Items.AddRange(options.ToArray());
         }
 
@@ -87,6 +87,10 @@ namespace CVVC_VCCV_Helper
                 case "CVVC English":
                     selected_dictionary = CVVC_English.GetConnectingNotes;
                     Console.WriteLine("Choosing CVVC English");
+                    break;
+                case "Arpasing English":
+                    selected_dictionary = Arpasing_English.GetConnectingNotes;
+                    Console.WriteLine("Choosing Arpasing English");
                     break;
                 case "CVVC Chinese":
                     selected_dictionary = CVVC_Chinese.GetConnectingNotes;

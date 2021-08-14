@@ -49,12 +49,13 @@ namespace MidiRounder
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void go_button_Click(object sender, EventArgs e)
         {
             foreach(UtauNote note in _notesList) {
                 // 80 is the length of a sixth of a quarter note
                 // round to the nearest multiple of 80
-                note.Length = ((note.Length + 80 / 2) / 80) * 80;
+                int tickamount = (int) tick_amount_input.Value;
+                note.Length = ((note.Length + tickamount / 2) / tickamount) * tickamount;
             }
 
             string output =

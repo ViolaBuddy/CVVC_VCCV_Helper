@@ -134,8 +134,10 @@ namespace CVVC_VCCV_Helper
                     CV.Length = CV.Length - 60; //TODO: something more clever with lengths. For now, 60 is a 32th note
                     VC.Lyric = newNote;
                     VC.Length = 60;
-                    if (Sonorant_Consonant_RE.IsMatch(lyric_split.Coda[0]))
+                    if (Sonorant_Consonant_RE.IsMatch(lyric_split.Coda[0]) && !next.IsRest)
                     {
+                        // on ending sonorants, add a dash before a C_C for blending
+                        // this doesn't apply if the next sound is a rest
                         VC.Lyric = newNote + "-";
                     }
                     toReturn.Add(VC);

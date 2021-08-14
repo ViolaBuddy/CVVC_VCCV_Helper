@@ -129,6 +129,22 @@ namespace UtauLib
         }
 
         /// <summary>
+        /// Returns whether or not this note is equal to obj
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(UtauNote other)
+        {
+            Console.WriteLine("AAAAAAAAAAAAAAAAAaa");
+            return other != null &&
+                this.Lyric == other.Lyric &&
+                this.Length == other.Length &&
+                this.Number == other.Number &&
+                this.IsRest == other.IsRest;
+            // This is nonstrict: it only test for the main properties
+        }
+
+        /// <summary>
         /// Splits the given UST File into a preamble followed by some number of notes
         /// The preamble is returned as the first of the tuple, and the list of notes as the second of the tuple
         /// </summary>

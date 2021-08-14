@@ -141,7 +141,7 @@ And now a chart for dealing with the coda:
 | V - VCC            | put a V followed by a VC- follwed by a VCC      | "aks" -> \[a\]\[ak-\]\[ks\]           |
 | V - VCC - VCC      | put a V followed by a VC- then VCC- then VCC    | "alks" -> \[a\]\[al-\]\[lk-\]\[ks-\]  |
 
-But slightly more complicated are how syllables interact with each other. Note as well t***** In the following, in addition to the abbreviations used above, N is any consonant that's a liquid/nasal/semivowel (l, m, n, ng, r, y, w) while K is any consonant that is not, and H is any vowel that's a diphthong and X is any vowel that is not (including syllabic consonants)
+But slightly more complicated are how syllables interact with each other. In the following, in addition to the abbreviations used above, N is any consonant that's a liquid/nasal/semivowel (l, m, n, ng, r, y, w) while K is any consonant that is not, and H is any vowel that's a diphthong and X is any vowel that is not (including syllabic consonants)
 
 | first syllable ending | second syllable beginning | what to do                                                          | example                                   |
 |-----------------------|---------------------------|---------------------------------------------------------------------|-------------------------------------------|
@@ -194,3 +194,25 @@ Every sound is either a vowel sound (\[-V\], \[V\], or \[V-\]), a CV sound (\[CV
 | V                     | V                         | use a "VV" sound instead of the second syllable                     | "Q a" -> \[Q\]\[Qa\]                      |
 | C                     | (rest)                    | nothing special                                                     | "ak R" -> \[a\]\[ak\]\[R\]                |
 | V                     | (rest)                    | add an additional V sound with a dash at the end of the syllable    | "a R" -> \[a\]\[a-\]\[R\]                 |
+
+
+# English Arpasing
+
+Whereas VCCV is very fined-tuned to fit the quirks of English, Arpasing's notation is very generally applicable. Every note is either two sounds together (whether CC, CV, VC, or VV), or a sound starting or ending a phrase as denoted by a dash (-C, -V, C-, V-). There are also vowels by themselves, though you'll only very rarely use them. As a rule of thumb, every phoneme in your song will appear exactly twice, once at the end of one note and once at the beginning of the next note.
+
+The tradeoff for this simplicity is that not all sound combinations are recorded. But exactly which ones are and aren't recorded will differ based on the specific rec list: there was an original rec list when Arpasing first came out, but Arpasing was designated not to be that specific rec list but the whole general pattern and naming convention. So because of these missing phoneme combinations, that rule of thumb I was talking about above (every phoneme appearing twice) is actually very much not true in practice: you'll have to work around all the sound combinations that don't actually exist in the specific voicebank that you're using.
+
+One other thing about Arpasing is that it's designed with redundancy: common sounds will be recorded multiple times, so you have the option to add 1 or 2 or 3 at the end of the note name to get different recording takes. This is something you'll have to adjust manually if you want to take advantage of it.
+
+But with those caveats out of the way, we can list out what all the phonemes are. Some are one letter and one are two, but there's no ambiguity because notes always have a space between phonemes, unlike in VCCV. Also, I'm grouping these into subcategories but Arpasing doesn't actually make these sorts of distinction (it barely even makes a distinction between vowel and consonant!), again unlike VCCV.
+
+## Consonants
+- normal consonants: b p v f | d t dh th z s zh sh jh ch | hh g k
+- semivowels, liquids, and nasals: w y m n l r
+- sounds not found in the original rec list: dx q el
+
+## Vowels
+- Pure and R-colored vowels: aa eh ih ah iy uw uh ao ae ax er
+- Diphthongs: ey ay ow oy aw
+
+See [this chart](https://arpasing.neocities.org/en/resources/phoneme-chart.html) for what these symbols sounds actually mean.
